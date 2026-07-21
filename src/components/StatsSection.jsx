@@ -15,42 +15,106 @@ export default function StatsSection() {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
+      const CACHE_KEY = 'github_stats_cache_v1';
+      const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
+
+      let cachedData = null;
       try {
+        const stored = localStorage.getItem(CACHE_KEY);
+        if (stored) {
+          cachedData = JSON.parse(stored);
+        }
+      } catch (e) {}
+
+      if (cachedData && Date.now() - cachedData.timestamp < CACHE_TTL) {
+        setProfile(cachedData.profile);
+        setTotalStars(cachedData.stars);
+        setEvents(cachedData.events);
+        setTotalContributions(cachedData.contributions);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        // Use Promise.allSettled or just catch individual errors
+        const fetchConfig = { headers: { Accept: 'application/vnd.github.v3+json' } };
+        const searchConfig = { headers: { Accept: 'application/vnd.github.cloak-preview' } };
+        
         const [profileRes, reposRes, eventsRes, commitsRes] = await Promise.all([
-          fetch('https://api.github.com/users/Alliance-Sky'),
-          fetch('https://api.github.com/users/Alliance-Sky/repos?per_page=100'),
-          fetch('https://api.github.com/users/Alliance-Sky/events/public?per_page=100'),
-          fetch('https://api.github.com/search/commits?q=author:Alliance-Sky', {
-            headers: { Accept: 'application/vnd.github.cloak-preview' }
-          })
+          fetch('https://api.github.com/users/Alliance-Sky', fetchConfig).catch(() => ({ ok: false })),
+          fetch('https://api.github.com/users/Alliance-Sky/repos?per_page=100', fetchConfig).catch(() => ({ ok: false })),
+          fetch('https://api.github.com/users/Alliance-Sky/events/public?per_page=100', fetchConfig).catch(() => ({ ok: false })),
+          fetch('https://api.github.com/search/commits?q=author:Alliance-Sky', searchConfig).catch(() => ({ ok: false }))
         ]);
 
+        let pData = null;
+        let stars = 0;
+        let eData = [];
+        let contributions = 0;
+        let isRateLimited = false;
+
         if (profileRes.ok) {
-          const pData = await profileRes.json();
+          pData = await profileRes.json();
           setProfile(pData);
+        } else {
+          isRateLimited = true;
         }
 
         if (reposRes.ok) {
           const rData = await reposRes.json();
           if (Array.isArray(rData)) {
-            const stars = rData.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0);
+            stars = rData.reduce((acc, repo) => acc + (repo.stargazers_count || 0), 0);
             setTotalStars(stars);
           }
+        } else {
+          isRateLimited = true;
         }
 
         if (eventsRes.ok) {
-          const eData = await eventsRes.json();
-          setEvents(eData);
+          eData = await eventsRes.json();
+          if (Array.isArray(eData)) {
+            setEvents(eData);
+          }
+        } else {
+          isRateLimited = true;
         }
 
         if (commitsRes.ok) {
           const cData = await commitsRes.json();
           if (cData && typeof cData.total_count === 'number') {
-            setTotalContributions(cData.total_count);
+            contributions = cData.total_count;
+            setTotalContributions(contributions);
           }
+        } else {
+          isRateLimited = true;
+        }
+
+        // If rate limited, try to fallback to expired cache
+        if (isRateLimited && cachedData) {
+          setProfile(cachedData.profile);
+          setTotalStars(cachedData.stars);
+          setEvents(cachedData.events);
+          setTotalContributions(cachedData.contributions);
+        } else if (pData) {
+          // Only cache if we at least got the profile successfully
+          try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({
+              timestamp: Date.now(),
+              profile: pData,
+              stars,
+              events: Array.isArray(eData) ? eData : [],
+              contributions
+            }));
+          } catch (e) {}
         }
       } catch (err) {
         console.error('Error fetching GitHub stats:', err);
+        if (cachedData) {
+          setProfile(cachedData.profile);
+          setTotalStars(cachedData.stars);
+          setEvents(cachedData.events);
+          setTotalContributions(cachedData.contributions);
+        }
       } finally {
         setLoading(false);
       }
