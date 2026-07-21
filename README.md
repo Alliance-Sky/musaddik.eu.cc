@@ -17,5 +17,15 @@ To build the project for production:
 npm run build
 ```
 
+## Deployment
+
+This project is configured to deploy directly to Cloudflare using the modern **Workers with Static Assets** approach. The configuration and custom domain (`musaddik.eu.cc`) are managed automatically via the `wrangler.jsonc` file.
+
+To deploy your changes to Cloudflare:
+```bash
+npm run build
+npx wrangler deploy
+```
+
 ## License
 MIT
