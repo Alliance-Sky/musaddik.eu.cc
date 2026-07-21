@@ -19,10 +19,10 @@ export default function Stats() {
       setLoading(true);
       try {
         const [profileRes, reposRes, eventsRes, commitsRes] = await Promise.all([
-          fetch('https://api.github.com/users/musaddiknpm'),
-          fetch('https://api.github.com/users/musaddiknpm/repos?per_page=100'),
-          fetch('https://api.github.com/users/musaddiknpm/events/public?per_page=100'),
-          fetch('https://api.github.com/search/commits?q=author:musaddiknpm', {
+          fetch('https://api.github.com/users/Alliance-Sky'),
+          fetch('https://api.github.com/users/Alliance-Sky/repos?per_page=100'),
+          fetch('https://api.github.com/users/Alliance-Sky/events/public?per_page=100'),
+          fetch('https://api.github.com/search/commits?q=author:Alliance-Sky', {
             headers: { Accept: 'application/vnd.github.cloak-preview' }
           })
         ]);

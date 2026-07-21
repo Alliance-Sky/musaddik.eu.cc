@@ -10,9 +10,18 @@ export default function Home() {
       id: 1,
       title: 'impulse-server',
       domain: 'impulse.psim.us',
-      description: 'impulse pokemon-showdown side server',
-      githubUrl: 'https://github.com/musaddiknpm/impulse-server',
+      description: 'Pokemon Showdown side server with custom chat-plugins and game modes.',
+      githubUrl: 'https://github.com/Alliance-Sky/impulse-server',
       liveUrl: 'https://impulse.psim.us',
+      isLive: true
+    },
+    {
+      id: 2,
+      title: 'mgba-web',
+      domain: 'mgba.musaddik.eu.cc',
+      description: 'A web-based Game Boy (GB), Game Boy Color (GBC), and Game Boy Advance (GBA) emulator.',
+      githubUrl: 'https://github.com/Alliance-Sky/mgba-web',
+      liveUrl: 'https://mgba.musaddik.eu.cc',
       isLive: true
     }
   ];
@@ -80,10 +89,9 @@ export default function Home() {
                     href={project.liveUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="hero-btn hero-btn-primary"
-                    style={{ padding: '0.3rem 0.75rem', fontSize: '0.8rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
+                    style={{ color: 'var(--text-muted)', fontSize: '0.78rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
                   >
-                    <Globe size={13} /> View Server <ExternalLink size={11} />
+                    <Globe size={12} className="project-card-icon" /> View Server <ExternalLink size={10} className="project-card-icon" />
                   </a>
                 ) : (
                   <div />
@@ -96,7 +104,7 @@ export default function Home() {
                     rel="noreferrer"
                     style={{ color: 'var(--text-muted)', fontSize: '0.78rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
                   >
-                    <Github size={12} /> Source <ExternalLink size={10} />
+                    <Github size={12} className="project-card-icon" /> Source <ExternalLink size={10} className="project-card-icon" />
                   </a>
                 )}
               </div>

@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="footer-content">
         <div className="footer-socials">
           <a 
-            href="https://github.com/musaddiknpm" 
+            href="https://github.com/Alliance-Sky" 
             target="_blank" 
             rel="noreferrer" 
             className="icon-btn"
@@ -17,7 +17,7 @@ export default function Footer() {
             <Github size={18} />
           </a>
           <a 
-            href="mailto:musaddiknpm@gmail.com" 
+            href="mailto:allianceskygit@gmail.com" 
             className="icon-btn"
             title="Email"
             aria-label="Email Me"

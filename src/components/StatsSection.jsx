@@ -17,10 +17,10 @@ export default function StatsSection() {
       setLoading(true);
       try {
         const [profileRes, reposRes, eventsRes, commitsRes] = await Promise.all([
-          fetch('https://api.github.com/users/musaddiknpm'),
-          fetch('https://api.github.com/users/musaddiknpm/repos?per_page=100'),
-          fetch('https://api.github.com/users/musaddiknpm/events/public?per_page=100'),
-          fetch('https://api.github.com/search/commits?q=author:musaddiknpm', {
+          fetch('https://api.github.com/users/Alliance-Sky'),
+          fetch('https://api.github.com/users/Alliance-Sky/repos?per_page=100'),
+          fetch('https://api.github.com/users/Alliance-Sky/events/public?per_page=100'),
+          fetch('https://api.github.com/search/commits?q=author:Alliance-Sky', {
             headers: { Accept: 'application/vnd.github.cloak-preview' }
           })
         ]);
@@ -128,27 +128,27 @@ export default function StatsSection() {
 
         <div className="card" style={{ padding: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
-            <Users size={18} />
-            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>FOLLOWERS</span>
+            <BookOpen size={18} />
+            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>GISTS</span>
           </div>
           <div style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.4rem' }}>
-            {profile?.followers || 0}
+            {profile?.public_gists ?? 0}
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
-            GitHub followers
+            Public gists
           </div>
         </div>
 
         <div className="card" style={{ padding: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
             <Star size={18} />
-            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>TOTAL STARS</span>
+            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>STARS</span>
           </div>
           <div style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.4rem' }}>
             {totalStars}
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
-            Repository stars
+            Total stars earned
           </div>
         </div>
 

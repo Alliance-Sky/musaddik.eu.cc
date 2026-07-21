@@ -375,6 +375,17 @@ body,
   }
 }
 
+/* Project Card Icons — match theme accent color */
+.project-card-icon {
+  color: var(--accent-color);
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Inside primary buttons, icons inherit the inverted button text color */
+.hero-btn-primary .project-card-icon {
+  color: inherit;
+}
+
 @keyframes iconPageFlip {
   0% {
     transform: rotate3d(1, -1, 0, 0deg) scale(1);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeftSquare } from 'lucide-react';
+import { ArrowLeftSquare, ExternalLink, Globe, Github } from 'lucide-react';
 
 export default function Projects() {
   const projects = [
@@ -8,8 +8,17 @@ export default function Projects() {
       id: 1,
       title: 'impulse-server',
       role: 'Fork Maintainer',
-      description: 'impulse pokemon-showdown server repository',
-      githubUrl: 'https://github.com/musaddiknpm/impulse-server'
+      description: 'Pokemon Showdown side server with custom chat-plugins and game modes.',
+      githubUrl: 'https://github.com/Alliance-Sky/impulse-server',
+      liveUrl: 'https://impulse.psim.us'
+    },
+    {
+      id: 2,
+      title: 'mgba-web',
+      role: 'Developer',
+      description: 'A web-based Game Boy (GB), Game Boy Color (GBC), and Game Boy Advance (GBA) emulator.',
+      githubUrl: 'https://github.com/Alliance-Sky/mgba-web',
+      liveUrl: 'https://mgba.musaddik.eu.cc'
     }
   ];
 
@@ -45,7 +54,7 @@ export default function Projects() {
           >
             <div style={{ display: 'flex', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
               <h2 className="project-row-title font-serif">
-                <a href={project.githubUrl} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                <a href={project.liveUrl || project.githubUrl} target="_blank" rel="noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                   {project.title}
                 </a>
               </h2>
@@ -54,9 +63,32 @@ export default function Projects() {
               </p>
             </div>
 
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontWeight: 400 }}>
+            <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', fontWeight: 400, margin: '0.25rem 0 0.5rem 0' }}>
               {project.description}
             </p>
+
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginTop: '0.25rem' }}>
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
+                >
+                  <Globe size={13} /> Website <ExternalLink size={10} />
+                </a>
+              )}
+              {project.githubUrl && (
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
+                >
+                  <Github size={13} /> Source <ExternalLink size={10} />
+                </a>
+              )}
+            </div>
           </div>
         ))}
       </div>

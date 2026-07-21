@@ -1,7 +1,11 @@
 {
-  "name": "portfolio",
-  "private": true,
-  "version": "0.0.0",
+  "name": "musaddik.eu.cc",
+  "version": "1.0.0",
+  "author": {
+    "name": "Alliance-Sky",
+    "email": "allianceskygit@gmail.com"
+  },
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "node ./node_modules/vite/bin/vite.js",
