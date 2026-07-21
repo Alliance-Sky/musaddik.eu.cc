@@ -13,7 +13,6 @@ export default function Stats() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [loading, setLoading] = useState(true);
 
-  // Fetch real GitHub Profile, Repos (for stars calculation), and Activity data
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
@@ -84,7 +83,6 @@ export default function Stats() {
 
   const [visibleCount, setVisibleCount] = useState(5);
 
-  // Filter events
   const filteredEvents = events.filter((evt) => {
     if (activeFilter === 'all') return true;
     if (activeFilter === 'commits') return evt.type === 'PushEvent';
@@ -102,7 +100,6 @@ export default function Stats() {
 
   return (
     <div className="fade-in">
-      {/* 1:1 Preserved Navigation Banner */}
       <Link to="/" className="nav-banner" title="Back to Home">
         <span className="nav-banner-home">
           <ArrowLeft size={18} /> Home
@@ -115,7 +112,6 @@ export default function Stats() {
         Here is my live developer dashboard and real-time GitHub activity feed.
       </p>
 
-      {/* Top Metric Counter Cards */}
       <div style={{ 
         display: 'grid', 
         gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
@@ -175,7 +171,6 @@ export default function Stats() {
         </div>
       </div>
 
-      {/* Real-time GitHub Activity Feed with Filters */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', gap: '0.4rem', width: '100%' }}>
           <h2 style={{ fontSize: 'clamp(0.85rem, 3.2vw, 1.25rem)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.35rem', whiteSpace: 'nowrap', margin: 0, flexShrink: 0 }}>
@@ -185,7 +180,6 @@ export default function Stats() {
 
           <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--accent-color)', opacity: 0.8, minWidth: '4px', margin: '0 0.35rem' }} />
 
-          {/* Activity Filter Buttons */}
           <div style={{ display: 'flex', gap: '0.3rem', flexShrink: 0 }}>
             {[
               { id: 'all', label: 'All' },

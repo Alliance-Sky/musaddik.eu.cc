@@ -1,9 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 
-/**
- * Bulletproof Pink Ribbon Teardrop Animation Engine
- * Guarded against non-finite values and device context failures
- */
 export default function FluidCanvas() {
   const canvasRef = useRef(null);
 

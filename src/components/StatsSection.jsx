@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  ExternalLink, GitCommit, Star, 
-  BookOpen, Users, GitFork, Activity 
+import {
+  ExternalLink, GitCommit, Star,
+  BookOpen, Users, GitFork, Activity
 } from 'lucide-react';
 
 export default function StatsSection() {
@@ -72,7 +72,7 @@ export default function StatsSection() {
     const date = new Date(dateString);
     const now = new Date();
     const diffInSeconds = Math.floor((now - date) / 1000);
-    
+
     if (diffInSeconds < 60) return 'Just now';
     if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)}m ago`;
     if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)}h ago`;
@@ -106,12 +106,11 @@ export default function StatsSection() {
         <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--accent-color)', opacity: 0.8 }} />
       </div>
 
-      {/* Metric Cards */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
-        gap: '1rem', 
-        marginBottom: '1.75rem' 
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+        gap: '1rem',
+        marginBottom: '1.75rem'
       }}>
         <div className="card" style={{ padding: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
@@ -166,7 +165,6 @@ export default function StatsSection() {
         </div>
       </div>
 
-      {/* Activity Stream */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', gap: '0.4rem', width: '100%' }}>
           <h3 style={{ fontSize: 'clamp(0.85rem, 3.2vw, 1.05rem)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.35rem', whiteSpace: 'nowrap', margin: 0, flexShrink: 0 }}>
@@ -212,9 +210,9 @@ export default function StatsSection() {
                 }
 
                 return (
-                  <div 
-                    key={evt.id} 
-                    className="stat-card" 
+                  <div
+                    key={evt.id}
+                    className="stat-card"
                     style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}
                   >
                     <div style={{ flex: 1, minWidth: '220px' }}>
@@ -225,18 +223,18 @@ export default function StatsSection() {
                         <a href={`https://github.com/${evt.repo.name}`} target="_blank" rel="noreferrer" className="underline-magical" style={{ fontWeight: 600 }}>
                           {evt.repo.name}
                         </a>
-                        
+
                         {shortSha && (
-                          <a 
-                            href={targetUrl} 
-                            target="_blank" 
+                          <a
+                            href={targetUrl}
+                            target="_blank"
                             rel="noreferrer"
                             className="font-mono"
-                            style={{ 
-                              fontSize: '0.75rem', 
-                              padding: '0.1rem 0.35rem', 
-                              borderRadius: '0.25rem', 
-                              background: 'var(--hover-bg)', 
+                            style={{
+                              fontSize: '0.75rem',
+                              padding: '0.1rem 0.35rem',
+                              borderRadius: '0.25rem',
+                              background: 'var(--hover-bg)',
                               border: '1px solid var(--border-color)',
                               color: 'var(--text-color)',
                               textDecoration: 'none'
@@ -258,11 +256,11 @@ export default function StatsSection() {
                       </div>
                     </div>
 
-                    <a 
-                      href={targetUrl} 
-                      target="_blank" 
-                      rel="noreferrer" 
-                      className="icon-btn" 
+                    <a
+                      href={targetUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="icon-btn"
                       title="View on GitHub"
                     >
                       <ExternalLink size={16} />

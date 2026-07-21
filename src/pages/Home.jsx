@@ -3,7 +3,7 @@ import { ExternalLink, Globe, Github } from 'lucide-react';
 import StatsSection from '../components/StatsSection';
 
 export default function Home() {
-  const bioText = "I'm Musaddik Temkar — a pokêmon fan and hobbyist developer building across the web stack with foundational knowledge of HTML, CSS, JavaScript, TypeScript and SQL, focusing on React, Next.js and Vite on the frontend, alongside Node.js and PostgreSQL for the backend. I build my software using AI to drive development, and I am always eager to learn and explore new technologies.";
+  const bioText = "I'm Musaddik Temkar — a pokemon fan and hobbyist developer building across the web stack with foundational knowledge of HTML, CSS, JavaScript, TypeScript and SQL, focusing on React, Next.js and Vite on the frontend, alongside Node.js and PostgreSQL for the backend. I build my software using AI to drive development, and I am always eager to learn and explore new technologies.";
 
   const projects = [
     {
@@ -23,6 +23,15 @@ export default function Home() {
       githubUrl: 'https://github.com/Alliance-Sky/mgba-web',
       liveUrl: 'https://mgba.musaddik.eu.cc',
       isLive: true
+    },
+    {
+      id: 3,
+      title: 'musaddik.eu.cc',
+      domain: 'musaddik.eu.cc',
+      description: 'Personal portfolio website inspired by @dalelarroder',
+      githubUrl: 'https://github.com/Alliance-Sky/musaddik.eu.cc',
+      liveUrl: 'https://musaddik.eu.cc',
+      isLive: true
     }
   ];
 
@@ -32,7 +41,6 @@ export default function Home() {
 
   return (
     <div className="hero-container fade-in">
-      {/* Title Header */}
       <h1 className="hero-title font-serif">
         <span className="highlight">Welcome to my personal portfolio</span>
         {' — '}
@@ -43,12 +51,10 @@ export default function Home() {
         </span>
       </h1>
 
-      {/* Main Bio Paragraph */}
       <p className="hero-bio">
         {bioText}
       </p>
 
-      {/* Projects Section */}
       <div className="home-projects-section" style={{ marginTop: '2.5rem', marginBottom: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--text-color)', margin: 0 }} className="font-serif">
@@ -125,7 +131,6 @@ export default function Home() {
         )}
       </div>
 
-      {/* Stats Section below Projects */}
       <StatsSection />
     </div>
   );

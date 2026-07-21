@@ -12,7 +12,6 @@ export default function Layout({ children }) {
     <div className="main-wrapper">
       <FluidCanvas />
 
-      {/* Fixed Top Header with Left "M" Logo (Main page only) & Right Theme Toggle */}
       <header className="top-header">
         <div>
           {isHomePage && (

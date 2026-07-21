@@ -19,6 +19,14 @@ export default function Projects() {
       description: 'A web-based Game Boy (GB), Game Boy Color (GBC), and Game Boy Advance (GBA) emulator.',
       githubUrl: 'https://github.com/Alliance-Sky/mgba-web',
       liveUrl: 'https://mgba.musaddik.eu.cc'
+    },
+    {
+      id: 3,
+      title: 'musaddik.eu.cc',
+      role: 'Developer',
+      description: 'Personal portfolio website inspired by @dalelarroder',
+      githubUrl: 'https://github.com/Alliance-Sky/musaddik.eu.cc',
+      liveUrl: 'https://musaddik.eu.cc'
     }
   ];
 
@@ -28,7 +36,6 @@ export default function Projects() {
 
   return (
     <div className="fade-in">
-      {/* Banner Header */}
       <Link to="/" className="nav-banner">
         <div className="nav-banner-home">
           <ArrowLeftSquare size={22} />
@@ -44,7 +51,6 @@ export default function Projects() {
         </p>
       </div>
 
-      {/* Typographic Hover List with short description */}
       <div>
         {visibleProjects.map((project) => (
           <div 

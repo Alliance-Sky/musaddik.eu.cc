@@ -1,13 +1,13 @@
-/* Dale Larroder Inspired Design System - 1:1 Exact Match */
+
 
 :root {
-  --bg-color: #ffffff; /* Pure White Canvas */
-  --text-color: #111827; /* Gray-900 Primary Text */
-  --text-muted: #4b5563; /* Gray-600 Muted Text */
-  --accent-color: #db2777; /* Animation Teardrop Pink/Magenta Accent (Light Theme) */
-  --border-color: #e5e7eb; /* Gray-200 Border */
-  --hover-bg: rgba(0, 0, 0, 0.04); /* Semi-transparent hover */
-  --card-bg: rgba(255, 255, 255, 0.04); /* Semi-transparent card allowing animation passthrough */
+  --bg-color: #ffffff;
+  --text-color: #111827;
+  --text-muted: #4b5563;
+  --accent-color: #db2777;
+  --border-color: #e5e7eb;
+  --hover-bg: rgba(0, 0, 0, 0.04);
+  --card-bg: rgba(255, 255, 255, 0.04);
   --item-border: #e5e7eb;
 }
 
@@ -15,10 +15,10 @@ html.dark {
   --bg-color: #000000;
   --text-color: #f3f4f6;
   --text-muted: #9ca3af;
-  --accent-color: #3b82f6; /* Blue Accent (Dark Theme) */
+  --accent-color: #3b82f6;
   --border-color: rgba(255, 255, 255, 0.12);
   --hover-bg: rgba(255, 255, 255, 0.06);
-  --card-bg: rgba(255, 255, 255, 0.06); /* Semi-transparent dark card */
+  --card-bg: rgba(255, 255, 255, 0.06);
   --item-border: #27272a;
 }
 
@@ -42,7 +42,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Strict Viewport Lock on Main Page matching dalelarroder.com 1:1 */
 body.home-page-locked {
   overflow: hidden !important;
   height: 100vh !important;
@@ -81,7 +80,6 @@ body.home-page-locked .hero-container {
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Magic Animated Underline Effect */
 .underline-magical {
   background-image: linear-gradient(120deg, var(--accent-color) 0%, #f43f5e 100%);
   background-repeat: no-repeat;
@@ -101,7 +99,6 @@ html.dark .underline-magical {
   color: #ffffff !important;
 }
 
-/* App Wrapper & Canvas */
 .main-wrapper {
   position: relative;
   min-height: 100vh;
@@ -123,12 +120,11 @@ html.dark .underline-magical {
   opacity: 0.85;
 }
 
-/* Main Container with Left/Right Borders like reference */
 .page-container {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 64rem; /* max-w-5xl */
+  max-width: 64rem;
   min-height: 100vh;
   border-left: 1px solid var(--border-color);
   border-right: 1px solid var(--border-color);
@@ -146,7 +142,6 @@ html.dark .underline-magical {
   }
 }
 
-/* Top Header Bar - Absolute Positioning (Non-Sticky, Scrolls with page naturally) */
 .top-header {
   position: absolute;
   top: 1.25rem;
@@ -189,7 +184,6 @@ html.dark .underline-magical {
   transform: scale(1.1);
 }
 
-/* Theme-Specific M Logo Styling */
 html.dark .m-logo-bg {
   fill: #09090b;
 }
@@ -214,20 +208,18 @@ html:not(.dark) .m-logo-text {
   fill: url(#headerLogoGradLight);
 }
 
-/* Smooth Global Theme Crossfade Transition (0.4s) */
-body, 
-.card, 
-.top-header, 
-.site-footer, 
-.hero-btn, 
-.project-row, 
+body,
+.card,
+.top-header,
+.site-footer,
+.hero-btn,
+.project-row,
 .icon-btn {
   transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Theme Toggle Button Styling & Pokéball Spin Animation */
 .theme-toggle-btn {
   position: relative;
   overflow: hidden;
@@ -262,7 +254,6 @@ body,
   }
 }
 
-/* Live Status Badge & Pulsing Indicator */
 .live-status-badge {
   display: inline-flex;
   align-items: center;
@@ -305,7 +296,6 @@ body,
   }
 }
 
-/* Responsive Project Card Layout */
 .project-card-container {
   display: flex;
   flex-direction: column;
@@ -359,7 +349,7 @@ body,
     align-items: flex-start;
     gap: 0.4rem;
   }
-  
+
   .project-card-actions {
     width: 100%;
     display: flex;
@@ -375,13 +365,11 @@ body,
   }
 }
 
-/* Project Card Icons — match theme accent color */
 .project-card-icon {
   color: var(--accent-color);
   transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Inside primary buttons, icons inherit the inverted button text color */
 .hero-btn-primary .project-card-icon {
   color: inherit;
 }
@@ -401,7 +389,6 @@ body,
   }
 }
 
-/* Theme-Specific Icons */
 .theme-sun-icon {
   color: #3b82f6;
 }
@@ -410,7 +397,6 @@ body,
   color: #db2777;
 }
 
-/* Home Hero Layout matched 1:1 - Top aligned with 8rem padding */
 .hero-container {
   display: flex;
   flex-direction: column;
@@ -445,7 +431,6 @@ body,
   line-height: 1.7;
 }
 
-/* Action Buttons centered / above "More about me:" */
 .hero-action-buttons {
   display: flex;
   align-items: center;
@@ -478,7 +463,6 @@ body,
   transform: translateY(-2px);
 }
 
-/* Semi-Transparent Buttons for both Light & Dark Theme */
 .hero-btn-secondary {
   background: var(--hover-bg);
   color: var(--text-color);
@@ -491,7 +475,6 @@ body,
   transform: translateY(-2px);
 }
 
-/* More About Me Section below buttons */
 .more-about-container {
   display: flex;
   flex-direction: column;
@@ -510,7 +493,6 @@ body,
   gap: 0.25rem;
 }
 
-/* Shared Header Banner Navigation for Inner Pages */
 .nav-banner {
   display: flex;
   align-items: center;
@@ -542,7 +524,6 @@ body,
   color: var(--text-color);
 }
 
-/* Projects 1:1 List */
 .project-row {
   display: flex;
   width: 100%;
@@ -580,7 +561,6 @@ body,
   transform: translateX(0.5rem) scale(1.04);
 }
 
-/* Heatmap & Grid Cards for Stats - Semi-Transparent Backdrop */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--border-color);
@@ -608,7 +588,6 @@ body,
   font-size: 0.9rem;
 }
 
-/* Simple fade animation */
 .fade-in {
   animation: fadeIn 0.4s ease-out forwards;
 }
@@ -624,7 +603,6 @@ body,
   }
 }
 
-/* Site Footer Styling */
 .site-footer {
   margin-top: 4rem;
   padding-top: 1.5rem;
@@ -652,5 +630,4 @@ body,
   align-items: center;
   gap: 0.5rem;
 }
-
 
