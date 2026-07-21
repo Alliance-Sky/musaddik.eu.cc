@@ -16,7 +16,7 @@ export default function StatsSection() {
     async function fetchData() {
       setLoading(true);
       const CACHE_KEY = 'github_stats_cache_v1';
-      const CACHE_TTL = 15 * 60 * 1000; // 15 minutes
+      const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
 
       let cachedData = null;
       try {
