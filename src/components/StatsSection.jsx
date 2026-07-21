@@ -154,7 +154,7 @@ export default function StatsSection() {
         <div className="card" style={{ padding: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
             <GitCommit size={18} />
-            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>TOTAL CONTRIBUTIONS</span>
+            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>CONTRIBUTIONS</span>
           </div>
           <div style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.4rem' }}>
             {totalContributions || events.length || 1}
