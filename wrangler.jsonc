@@ -2,6 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "musaddik-eu-cc",
   "compatibility_date": "2024-03-20",
+  "main": "src/worker.js",
   "assets": {
     "directory": "dist",
     "binding": "ASSETS"
