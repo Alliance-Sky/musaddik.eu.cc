@@ -27,7 +27,7 @@ export default function Footer() {
         </div>
 
         <p className="footer-copyright font-mono">
-          Copyright {new Date().getFullYear()} Musaddik Temkar. Built with React & Vite.
+          © {new Date().getFullYear()} Musaddik Temkar. Built with React & Vite.
         </p>
       </div>
     </footer>
