@@ -9,7 +9,6 @@ export default function Home() {
     {
       id: 1,
       title: 'impulse-server',
-      role: 'Fork Maintainer',
       domain: 'impulse-server.com',
       description: 'impulse pokemon-showdown server repository & live server instance',
       githubUrl: 'https://github.com/musaddiknpm/impulse-server',
@@ -59,7 +58,7 @@ export default function Home() {
                       <span className="live-status-dot" /> Live
                     </span>
                   ) : (
-                    <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>{project.role}</span>
+                    <div />
                   )}
                   {project.domain && (
                     <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: "'JetBrains Mono', monospace" }}>{project.domain}</span>
@@ -71,7 +70,7 @@ export default function Home() {
                 </h3>
 
                 <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0, lineHeight: 1.45 }}>
-                  <span style={{ fontWeight: 600, color: 'var(--text-color)' }}>{project.role}</span> &bull; {project.description}
+                  {project.description}
                 </p>
               </div>
 
