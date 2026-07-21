@@ -80,7 +80,7 @@ export default function StatsSection() {
     return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
   };
 
-  const [visibleCount, setVisibleCount] = useState(5);
+  const [visibleCount, setVisibleCount] = useState(4);
 
   const filteredEvents = events.filter((evt) => {
     if (activeFilter === 'all') return true;
@@ -94,7 +94,7 @@ export default function StatsSection() {
 
   const handleFilterSelect = (filterId) => {
     setActiveFilter(filterId);
-    setVisibleCount(5);
+    setVisibleCount(4);
   };
 
   return (
@@ -273,7 +273,7 @@ export default function StatsSection() {
             {hasMore && (
               <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.25rem' }}>
                 <button
-                  onClick={() => setVisibleCount((prev) => prev + 5)}
+                  onClick={() => setVisibleCount((prev) => prev + 4)}
                   className="hero-btn hero-btn-secondary"
                   style={{ padding: '0.45rem 1.25rem', fontSize: '0.85rem', cursor: 'pointer' }}
                 >

@@ -35,7 +35,7 @@ export default function Home() {
     }
   ];
 
-  const [visibleProjectCount, setVisibleProjectCount] = useState(5);
+  const [visibleProjectCount, setVisibleProjectCount] = useState(4);
   const visibleProjects = projects.slice(0, visibleProjectCount);
   const hasMoreProjects = projects.length > visibleProjectCount;
 
@@ -121,7 +121,7 @@ export default function Home() {
         {hasMoreProjects && (
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.25rem' }}>
             <button
-              onClick={() => setVisibleProjectCount((prev) => prev + 5)}
+              onClick={() => setVisibleProjectCount((prev) => prev + 4)}
               className="hero-btn hero-btn-secondary"
               style={{ padding: '0.45rem 1.25rem', fontSize: '0.85rem', cursor: 'pointer' }}
             >
