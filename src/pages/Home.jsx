@@ -9,10 +9,10 @@ export default function Home() {
     {
       id: 1,
       title: 'impulse-server',
-      domain: 'impulse-server.com',
-      description: 'impulse pokemon-showdown server repository & live server instance',
+      domain: 'impulse.psim.us',
+      description: 'impulse pokemon-showdown side server',
       githubUrl: 'https://github.com/musaddiknpm/impulse-server',
-      liveUrl: 'https://github.com/musaddiknpm/impulse-server', // Replace with live domain when deployed
+      liveUrl: 'https://impulse.psim.us',
       isLive: true
     }
   ];
@@ -83,7 +83,7 @@ export default function Home() {
                     className="hero-btn hero-btn-primary"
                     style={{ padding: '0.3rem 0.75rem', fontSize: '0.8rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
                   >
-                    <Globe size={13} /> Visit App <ExternalLink size={11} />
+                    <Globe size={13} /> View Server <ExternalLink size={11} />
                   </a>
                 ) : (
                   <div />
