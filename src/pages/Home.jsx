@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Globe, Github } from 'lucide-react';
 import StatsSection from '../components/StatsSection';
 
 export default function Home() {
@@ -11,6 +11,17 @@ export default function Home() {
       title: 'impulse-server',
       role: 'Fork Maintainer',
       description: 'impulse pokemon-showdown server repository',
+      githubUrl: 'https://github.com/musaddiknpm/impulse-server'
+    }
+  ];
+
+  const liveProjects = [
+    {
+      id: 1,
+      title: 'impulse-server',
+      domain: 'impulse-server.com',
+      description: 'Live Impulse Pokemon Showdown server instance hosted on cloud infrastructure.',
+      liveUrl: 'https://github.com/musaddiknpm/impulse-server', // Replace with live app domain when deployed
       githubUrl: 'https://github.com/musaddiknpm/impulse-server'
     }
   ];
@@ -37,7 +48,7 @@ export default function Home() {
         {bioText}
       </p>
 
-      {/* Projects Section below bio text */}
+      {/* Projects Section */}
       <div className="home-projects-section" style={{ marginTop: '2rem', marginBottom: '0.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem' }}>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--text-color)', margin: 0 }} className="font-serif">
@@ -63,7 +74,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 400 }}>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', fontWeight: 400, margin: 0 }}>
                 {project.description}
               </p>
             </div>
@@ -81,6 +92,62 @@ export default function Home() {
             </button>
           </div>
         )}
+      </div>
+
+      {/* Dedicated Live Previews Section */}
+      <div className="home-live-previews-section" style={{ marginTop: '2.5rem', marginBottom: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--text-color)', margin: 0 }} className="font-serif">
+            Live Previews
+          </h2>
+          <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--accent-color)', opacity: 0.8 }} />
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+          {liveProjects.map((project) => (
+            <div key={project.id} className="card live-preview-card" style={{ padding: '1.25rem', borderRadius: '0.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '0.75rem' }}>
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
+                  <span className="live-status-badge">
+                    <span className="live-status-dot" /> Live
+                  </span>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: "'JetBrains Mono', monospace" }}>{project.domain}</span>
+                </div>
+
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 600, margin: '0 0 0.35rem 0' }} className="font-serif">
+                  {project.title}
+                </h3>
+
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0, lineHeight: 1.45 }}>
+                  {project.description}
+                </p>
+              </div>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.65rem', borderTop: '1px solid var(--item-border)' }}>
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-btn hero-btn-primary"
+                  style={{ padding: '0.3rem 0.75rem', fontSize: '0.8rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
+                >
+                  <Globe size={13} /> Visit App <ExternalLink size={11} />
+                </a>
+
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{ color: 'var(--text-muted)', fontSize: '0.78rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
+                  >
+                    <Github size={12} /> Source <ExternalLink size={10} />
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Stats Section below Projects */}
