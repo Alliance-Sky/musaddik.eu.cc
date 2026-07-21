@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import FluidCanvas from './FluidCanvas';
 import ThemeToggle from './ThemeToggle';
+import Footer from './Footer';
 
 export default function Layout({ children }) {
   const location = useLocation();
@@ -18,7 +19,11 @@ export default function Layout({ children }) {
             <Link to="/" className="icon-btn top-logo" title="Musaddik Temkar — Home" aria-label="Home">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="24" height="24" className="m-logo-svg">
                 <defs>
-                  <linearGradient id="headerLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <linearGradient id="headerLogoGradLight" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#db2777" />
+                    <stop offset="100%" stopColor="#f43f5e" />
+                  </linearGradient>
+                  <linearGradient id="headerLogoGradDark" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#3b82f6" />
                     <stop offset="100%" stopColor="#8b5cf6" />
                   </linearGradient>
@@ -37,8 +42,12 @@ export default function Layout({ children }) {
       </header>
 
       <main className="page-container">
-        {children}
+        <div style={{ flex: 1 }}>
+          {children}
+        </div>
+        <Footer />
       </main>
     </div>
   );
 }
+

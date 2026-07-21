@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeftSquare } from 'lucide-react';
 
@@ -7,11 +7,15 @@ export default function Projects() {
     {
       id: 1,
       title: 'impulse-server',
-      role: 'Maintainer',
+      role: 'Fork Maintainer',
       description: 'impulse pokemon-showdown server repository',
       githubUrl: 'https://github.com/musaddiknpm/impulse-server'
     }
   ];
+
+  const [visibleProjectCount, setVisibleProjectCount] = useState(5);
+  const visibleProjects = projects.slice(0, visibleProjectCount);
+  const hasMoreProjects = projects.length > visibleProjectCount;
 
   return (
     <div className="fade-in">
@@ -33,7 +37,7 @@ export default function Projects() {
 
       {/* Typographic Hover List with short description */}
       <div>
-        {projects.map((project) => (
+        {visibleProjects.map((project) => (
           <div 
             key={project.id} 
             className="project-row"
@@ -56,6 +60,18 @@ export default function Projects() {
           </div>
         ))}
       </div>
+
+      {hasMoreProjects && (
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+          <button
+            onClick={() => setVisibleProjectCount((prev) => prev + 5)}
+            className="hero-btn hero-btn-secondary"
+            style={{ padding: '0.5rem 1.5rem', fontSize: '0.88rem', cursor: 'pointer' }}
+          >
+            More
+          </button>
+        </div>
+      )}
     </div>
   );
 }

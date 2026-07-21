@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { 
-  ArrowLeft, ExternalLink, GitCommit, 
-  Star, BookOpen, Users, GitFork, Activity 
+  ExternalLink, GitCommit, Star, 
+  BookOpen, Users, GitFork, Activity 
 } from 'lucide-react';
 
-export default function Stats() {
+export default function StatsSection() {
   const [profile, setProfile] = useState(null);
   const [events, setEvents] = useState([]);
   const [totalStars, setTotalStars] = useState(0);
@@ -13,7 +12,6 @@ export default function Stats() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [loading, setLoading] = useState(true);
 
-  // Fetch real GitHub Profile, Repos (for stars calculation), and Activity data
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
@@ -84,7 +82,6 @@ export default function Stats() {
 
   const [visibleCount, setVisibleCount] = useState(5);
 
-  // Filter events
   const filteredEvents = events.filter((evt) => {
     if (activeFilter === 'all') return true;
     if (activeFilter === 'commits') return evt.type === 'PushEvent';
@@ -101,91 +98,84 @@ export default function Stats() {
   };
 
   return (
-    <div className="fade-in">
-      {/* 1:1 Preserved Navigation Banner */}
-      <Link to="/" className="nav-banner" title="Back to Home">
-        <span className="nav-banner-home">
-          <ArrowLeft size={18} /> Home
-        </span>
-        <div className="nav-banner-line" />
-        <h1 className="nav-banner-title font-serif">Stats</h1>
-      </Link>
+    <div className="home-stats-section" style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--text-color)', margin: 0 }} className="font-serif">
+          Stats & Live Activity
+        </h2>
+        <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--accent-color)', opacity: 0.8 }} />
+      </div>
 
-      <p className="text-muted" style={{ marginBottom: '2.5rem' }}>
-        Here is my live developer dashboard and real-time GitHub activity feed.
-      </p>
-
-      {/* Top Metric Counter Cards */}
+      {/* Metric Cards */}
       <div style={{ 
         display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-        gap: '1.25rem', 
-        marginBottom: '2.5rem' 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', 
+        gap: '1rem', 
+        marginBottom: '1.75rem' 
       }}>
-        <div className="card" style={{ padding: '1.25rem' }}>
+        <div className="card" style={{ padding: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
-            <BookOpen size={20} />
-            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>REPOSITORIES</span>
+            <BookOpen size={18} />
+            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>REPOSITORIES</span>
           </div>
-          <div style={{ fontSize: '2rem', fontWeight: 700, marginTop: '0.5rem' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.4rem' }}>
             {profile?.public_repos || 1}
           </div>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
-            Public projects on GitHub
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
+            Public projects
           </div>
         </div>
 
-        <div className="card" style={{ padding: '1.25rem' }}>
+        <div className="card" style={{ padding: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
-            <Users size={20} />
-            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>FOLLOWERS</span>
+            <Users size={18} />
+            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>FOLLOWERS</span>
           </div>
-          <div style={{ fontSize: '2rem', fontWeight: 700, marginTop: '0.5rem' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.4rem' }}>
             {profile?.followers || 0}
           </div>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
-            GitHub network followers
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
+            GitHub followers
           </div>
         </div>
 
-        <div className="card" style={{ padding: '1.25rem' }}>
+        <div className="card" style={{ padding: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
-            <Star size={20} />
-            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>TOTAL STARS</span>
+            <Star size={18} />
+            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>TOTAL STARS</span>
           </div>
-          <div style={{ fontSize: '2rem', fontWeight: 700, marginTop: '0.5rem' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.4rem' }}>
             {totalStars}
           </div>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
-            GitHub Repository Stars
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
+            Repository stars
           </div>
         </div>
 
-        <div className="card" style={{ padding: '1.25rem' }}>
+        <div className="card" style={{ padding: '1rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
-            <GitCommit size={20} />
-            <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)' }}>TOTAL CONTRIBUTIONS</span>
+            <GitCommit size={18} />
+            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>TOTAL CONTRIBUTIONS</span>
           </div>
-          <div style={{ fontSize: '2rem', fontWeight: 700, marginTop: '0.5rem' }}>
+          <div style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.4rem' }}>
             {totalContributions || events.length || 1}
           </div>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
-            Public commits & contributions
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
+            Public commits & activities
           </div>
         </div>
       </div>
 
-      {/* Real-time GitHub Activity Feed with Filters */}
+      {/* Activity Stream */}
       <div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', gap: '0.4rem', width: '100%' }}>
-          <h2 style={{ fontSize: 'clamp(0.85rem, 3.2vw, 1.25rem)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.35rem', whiteSpace: 'nowrap', margin: 0, flexShrink: 0 }}>
-            <Activity size={20} style={{ color: 'var(--accent-color)', flexShrink: 0 }} />
-            <span>Live GitHub Activity Stream</span>
-          </h2>
+          <h3 style={{ fontSize: 'clamp(0.85rem, 3.2vw, 1.05rem)', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.35rem', whiteSpace: 'nowrap', margin: 0, flexShrink: 0 }}>
+            <Activity size={18} style={{ color: 'var(--accent-color)', flexShrink: 0 }} />
+            <span>Live GitHub Activity</span>
+          </h3>
 
           <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--accent-color)', opacity: 0.8, minWidth: '4px', margin: '0 0.35rem' }} />
 
-          {/* Activity Filter Buttons */}
           <div style={{ display: 'flex', gap: '0.3rem', flexShrink: 0 }}>
             {[
               { id: 'all', label: 'All' },
@@ -205,10 +195,10 @@ export default function Stats() {
         </div>
 
         {loading ? (
-          <p className="text-muted">Loading live activity feed...</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem' }}>Loading live activity feed...</p>
         ) : visibleEvents.length > 0 ? (
           <>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {visibleEvents.map((evt) => {
                 const commitSha = evt.payload?.commits?.[0]?.sha || evt.payload?.head;
                 const commitMessage = evt.payload?.commits?.[0]?.message;
@@ -227,11 +217,11 @@ export default function Stats() {
                     className="stat-card" 
                     style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}
                   >
-                    <div style={{ flex: 1, minWidth: '240px' }}>
-                      <div style={{ fontWeight: 600, fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.4rem', flexWrap: 'wrap' }}>
-                        <GitCommit size={16} className="text-accent" />
+                    <div style={{ flex: 1, minWidth: '220px' }}>
+                      <div style={{ fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'wrap' }}>
+                        <GitCommit size={15} className="text-accent" />
                         <span style={{ textTransform: 'capitalize' }}>{formatEventType(evt.type)}</span>
-                        <span className="text-muted">on</span>
+                        <span style={{ color: 'var(--text-muted)' }}>on</span>
                         <a href={`https://github.com/${evt.repo.name}`} target="_blank" rel="noreferrer" className="underline-magical" style={{ fontWeight: 600 }}>
                           {evt.repo.name}
                         </a>
@@ -244,7 +234,7 @@ export default function Stats() {
                             className="font-mono"
                             style={{ 
                               fontSize: '0.75rem', 
-                              padding: '0.15rem 0.45rem', 
+                              padding: '0.1rem 0.35rem', 
                               borderRadius: '0.25rem', 
                               background: 'var(--hover-bg)', 
                               border: '1px solid var(--border-color)',
@@ -258,12 +248,12 @@ export default function Stats() {
                       </div>
 
                       {commitMessage && (
-                        <div style={{ fontSize: '0.88rem', color: 'var(--text-color)', marginTop: '0.3rem', fontStyle: 'italic' }}>
+                        <div style={{ fontSize: '0.85rem', color: 'var(--text-color)', marginTop: '0.25rem', fontStyle: 'italic' }}>
                           "{commitMessage}"
                         </div>
                       )}
 
-                      <div className="text-muted" style={{ fontSize: '0.8rem', marginTop: '0.3rem' }}>
+                      <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem', marginTop: '0.25rem' }}>
                         {getTimeAgo(evt.created_at)} ({new Date(evt.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })})
                       </div>
                     </div>
@@ -283,11 +273,11 @@ export default function Stats() {
             </div>
 
             {hasMore && (
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.25rem' }}>
                 <button
                   onClick={() => setVisibleCount((prev) => prev + 5)}
                   className="hero-btn hero-btn-secondary"
-                  style={{ padding: '0.5rem 1.5rem', fontSize: '0.88rem', cursor: 'pointer' }}
+                  style={{ padding: '0.45rem 1.25rem', fontSize: '0.85rem', cursor: 'pointer' }}
                 >
                   More
                 </button>
@@ -295,7 +285,7 @@ export default function Stats() {
             )}
           </>
         ) : (
-          <p className="text-muted">No public activity matching the selected filter found.</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem' }}>No public activity matching the selected filter found.</p>
         )}
       </div>
     </div>
