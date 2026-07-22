@@ -32,6 +32,22 @@ export default function Home() {
       githubUrl: 'https://github.com/Alliance-Sky/musaddik.eu.cc',
       liveUrl: 'https://musaddik.eu.cc',
       isLive: true
+    },
+    {
+      id: 4,
+      title: 'smogon-stats',
+      domain: 'smogonstats.eu.cc',
+      description: 'A Pokemon Showdown usage stats viewer built with React and Vite.',
+      githubUrl: 'https://github.com/Alliance-Sky/smogon-stats',
+      liveUrl: 'https://smogonstats.eu.cc',
+      isLive: true
+    },
+    {
+      id: 5,
+      title: 'proxy-api',
+      description: 'A fast, caching reverse proxy built with Fastify to serve Smogon usage stats efficiently.',
+      githubUrl: 'https://github.com/Alliance-Sky/proxy-api',
+      isLive: true
     }
   ];
 
