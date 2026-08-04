@@ -45,7 +45,7 @@ export default function Home() {
     {
       id: 5,
       title: 'proxy-api',
-      description: 'A fast, caching reverse proxy built with Fastify to serve Smogon usage stats efficiently.',
+      description: 'A fast, caching reverse proxy built with Golang to serve Smogon usage stats efficiently.',
       githubUrl: 'https://github.com/Alliance-Sky/proxy-api',
       isLive: true
     }
