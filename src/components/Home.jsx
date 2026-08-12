@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ExternalLink, Globe, Github } from 'lucide-react';
+import { ExternalLink } from 'lucide-preact';
+import Github from '../components/GithubIcon';
 import StatsSection from '../components/StatsSection';
 
 export default function Home() {
@@ -13,7 +14,8 @@ export default function Home() {
       description: 'Pokemon Showdown side server with custom chat-plugins and game modes.',
       githubUrl: 'https://github.com/Alliance-Sky/impulse-server',
       liveUrl: 'https://impulse.psim.us',
-      isLive: true
+      isLive: true,
+      tags: ['TypeScript', 'Node.js', 'PostgreSQL']
     },
     {
       id: 2,
@@ -22,7 +24,8 @@ export default function Home() {
       description: 'A web-based Game Boy (GB), Game Boy Color (GBC), and Game Boy Advance (GBA) emulator.',
       githubUrl: 'https://github.com/Alliance-Sky/mgba-web',
       liveUrl: 'https://mgba.musaddik.eu.cc',
-      isLive: true
+      isLive: true,
+      tags: ['JavaScript', 'CSS', 'HTML']
     },
     {
       id: 3,
@@ -31,23 +34,26 @@ export default function Home() {
       description: 'Personal portfolio website inspired by @dalelarroder',
       githubUrl: 'https://github.com/Alliance-Sky/musaddik.eu.cc',
       liveUrl: 'https://musaddik.eu.cc',
-      isLive: true
+      isLive: true,
+      tags: ['Astro', 'Preact', 'CSS']
     },
     {
       id: 4,
       title: 'smogon-stats',
       domain: 'smogonstats.eu.cc',
-      description: 'A Pokemon Showdown usage stats viewer built with React and Vite.',
+      description: 'A Pokemon Showdown usage stats viewer built with Preact and Vite.',
       githubUrl: 'https://github.com/Alliance-Sky/smogon-stats',
       liveUrl: 'https://smogonstats.eu.cc',
-      isLive: true
+      isLive: true,
+      tags: ['Preact', 'Zustand', 'Chart.js']
     },
     {
       id: 5,
       title: 'proxy-api',
       description: 'A fast, caching reverse proxy built with Golang to serve Smogon usage stats efficiently.',
       githubUrl: 'https://github.com/Alliance-Sky/proxy-api',
-      isLive: true
+      isLive: true,
+      tags: ['Go', 'REST API', 'Caching']
     }
   ];
 
@@ -56,8 +62,8 @@ export default function Home() {
   const hasMoreProjects = projects.length > visibleProjectCount;
 
   return (
-    <div className="hero-container fade-in">
-      <h1 className="hero-title font-serif">
+    <div className="intro">
+      <h1 className="intro-title font-serif">
         <span className="highlight">Welcome to my personal portfolio</span>
         {' — '}
         <span style={{ fontStyle: 'italic' }}>
@@ -67,7 +73,7 @@ export default function Home() {
         </span>
       </h1>
 
-      <p className="hero-bio">
+      <p className="bio">
         {bioText}
       </p>
 
@@ -79,56 +85,36 @@ export default function Home() {
           <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--accent-color)', opacity: 0.8 }} />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           {visibleProjects.map((project) => (
-            <div key={project.id} className="card live-preview-card" style={{ padding: '1.25rem', borderRadius: '0.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '0.75rem' }}>
+            <div key={project.id} className="project-row card">
+              <div className="project-header">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <h3 className="project-title font-serif">{project.title}</h3>
+                </div>
+                {project.tags && (
+                  <div className="project-tags">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="tech-tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.6rem' }}>
-                  {project.isLive ? (
-                    <span className="live-status-badge">
-                      <span className="live-status-dot" /> Live
-                    </span>
-                  ) : (
-                    <div />
+                <p className="project-desc">{project.description}</p>
+                <div className="project-links">
+                  {project.liveUrl && (
+                    <a href={project.liveUrl} target="_blank" rel="noreferrer" className="project-link">
+                      Visit Site <ExternalLink size={14} />
+                    </a>
                   )}
-                  {project.domain && (
-                    <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', fontFamily: "'JetBrains Mono', monospace" }}>{project.domain}</span>
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} target="_blank" rel="noreferrer" className="project-link">
+                      <Github size={14} /> Source Code
+                    </a>
                   )}
                 </div>
-
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 600, margin: '0 0 0.35rem 0' }} className="font-serif">
-                  {project.title}
-                </h3>
-
-                <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: 0, lineHeight: 1.45 }}>
-                  {project.description}
-                </p>
-              </div>
-
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '0.65rem', borderTop: '1px solid var(--item-border)' }}>
-                {project.liveUrl ? (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{ color: 'var(--text-muted)', fontSize: '0.78rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
-                  >
-                    <Globe size={12} className="project-card-icon" /> View Server <ExternalLink size={10} className="project-card-icon" />
-                  </a>
-                ) : (
-                  <div />
-                )}
-
-                {project.githubUrl && (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{ color: 'var(--text-muted)', fontSize: '0.78rem', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
-                  >
-                    <Github size={12} className="project-card-icon" /> Source <ExternalLink size={10} className="project-card-icon" />
-                  </a>
-                )}
               </div>
             </div>
           ))}
@@ -138,7 +124,7 @@ export default function Home() {
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.25rem' }}>
             <button
               onClick={() => setVisibleProjectCount((prev) => prev + 4)}
-              className="hero-btn hero-btn-secondary"
+              className="btn btn-secondary"
               style={{ padding: '0.45rem 1.25rem', fontSize: '0.85rem', cursor: 'pointer' }}
             >
               More

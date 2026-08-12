@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
   ExternalLink, GitCommit, Star,
-  BookOpen, Users, GitFork, Activity
-} from 'lucide-react';
+  BookOpen, Activity
+} from 'lucide-preact';
 
 export default function StatsSection() {
   const [profile, setProfile] = useState(null);
@@ -16,7 +16,7 @@ export default function StatsSection() {
     async function fetchData() {
       setLoading(true);
       const CACHE_KEY = 'github_stats_cache_v1';
-      const CACHE_TTL = 30 * 60 * 1000; // 30 minutes
+      const CACHE_TTL = 30 * 60 * 1000;
 
       let cachedData = null;
       try {
@@ -36,7 +36,6 @@ export default function StatsSection() {
       }
 
       try {
-        // Use Promise.allSettled or just catch individual errors
         const fetchConfig = { headers: { Accept: 'application/vnd.github.v3+json' } };
         const searchConfig = { headers: { Accept: 'application/vnd.github.cloak-preview' } };
         
@@ -89,14 +88,12 @@ export default function StatsSection() {
           isRateLimited = true;
         }
 
-        // If rate limited, try to fallback to expired cache
         if (isRateLimited && cachedData) {
           setProfile(cachedData.profile);
           setTotalStars(cachedData.stars);
           setEvents(cachedData.events);
           setTotalContributions(cachedData.contributions);
         } else if (pData) {
-          // Only cache if we at least got the profile successfully
           try {
             localStorage.setItem(CACHE_KEY, JSON.stringify({
               timestamp: Date.now(),
@@ -119,7 +116,21 @@ export default function StatsSection() {
         setLoading(false);
       }
     }
-    fetchData();
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        fetchData();
+        observer.disconnect();
+      }
+    }, { rootMargin: '100px' });
+
+    const element = document.getElementById('github-stats-section');
+    if (element) {
+      observer.observe(element);
+    } else {
+      fetchData();
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   const formatEventType = (type) => {
@@ -162,7 +173,7 @@ export default function StatsSection() {
   };
 
   return (
-    <div className="home-stats-section" style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+    <div id="github-stats-section" className="home-stats-section" style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem' }}>
         <h2 style={{ fontSize: '1.5rem', fontWeight: 600, color: 'var(--text-color)', margin: 0 }} className="font-serif">
           Stats & Live Activity
@@ -170,60 +181,51 @@ export default function StatsSection() {
         <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--accent-color)', opacity: 0.8 }} />
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-        gap: '1rem',
-        marginBottom: '1.75rem'
-      }}>
-        <div className="card" style={{ padding: '1rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
-            <BookOpen size={18} />
-            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>REPOSITORIES</span>
+      <div className="stats-grid">
+        <div className="stat-item card">
+          <div className="stat-header">
+            <BookOpen size={16} /> REPOSITORIES
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.4rem' }}>
+          <div className="stat-value">
             {profile?.public_repos || 1}
           </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
+          <div className="stat-desc">
             Public projects
           </div>
         </div>
 
-        <div className="card" style={{ padding: '1rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
-            <BookOpen size={18} />
-            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>GISTS</span>
+        <div className="stat-item card">
+          <div className="stat-header">
+            <BookOpen size={16} /> GISTS
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.4rem' }}>
+          <div className="stat-value">
             {profile?.public_gists ?? 0}
           </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
+          <div className="stat-desc">
             Public gists
           </div>
         </div>
 
-        <div className="card" style={{ padding: '1rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
-            <Star size={18} />
-            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>STARS</span>
+        <div className="stat-item card">
+          <div className="stat-header">
+            <Star size={16} /> STARS
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.4rem' }}>
+          <div className="stat-value">
             {totalStars}
           </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
+          <div className="stat-desc">
             Total stars earned
           </div>
         </div>
 
-        <div className="card" style={{ padding: '1rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--accent-color)' }}>
-            <GitCommit size={18} />
-            <span style={{ fontSize: '0.7rem', fontWeight: 600, color: 'var(--text-muted)' }}>CONTRIBUTIONS</span>
+        <div className="stat-item card">
+          <div className="stat-header">
+            <GitCommit size={16} /> CONTRIBUTIONS
           </div>
-          <div style={{ fontSize: '1.75rem', fontWeight: 700, marginTop: '0.4rem' }}>
+          <div className="stat-value">
             {totalContributions || events.length || 1}
           </div>
-          <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
+          <div className="stat-desc">
             Public commits & activities
           </div>
         </div>
@@ -247,7 +249,7 @@ export default function StatsSection() {
               <button
                 key={tab.id}
                 onClick={() => handleFilterSelect(tab.id)}
-                className={`hero-btn ${activeFilter === tab.id ? 'hero-btn-primary' : 'hero-btn-secondary'}`}
+                className={`btn ${activeFilter === tab.id ? 'btn-primary' : 'btn-secondary'}`}
                 style={{ padding: '0.2rem 0.55rem', fontSize: '0.78rem', whiteSpace: 'nowrap' }}
               >
                 {tab.label}
@@ -260,7 +262,7 @@ export default function StatsSection() {
           <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem' }}>Loading live activity feed...</p>
         ) : visibleEvents.length > 0 ? (
           <>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <div className="activity-list">
               {visibleEvents.map((evt) => {
                 const commitSha = evt.payload?.commits?.[0]?.sha || evt.payload?.head;
                 const commitMessage = evt.payload?.commits?.[0]?.message;
@@ -274,61 +276,34 @@ export default function StatsSection() {
                 }
 
                 return (
-                  <div
-                    key={evt.id}
-                    className="stat-card"
-                    style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.75rem' }}
-                  >
-                    <div style={{ flex: 1, minWidth: '220px' }}>
-                      <div style={{ fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.35rem', flexWrap: 'wrap' }}>
-                        <GitCommit size={15} className="text-accent" />
-                        <span style={{ textTransform: 'capitalize' }}>{formatEventType(evt.type)}</span>
-                        <span style={{ color: 'var(--text-muted)' }}>on</span>
-                        <a href={`https://github.com/${evt.repo.name}`} target="_blank" rel="noreferrer" className="underline-magical" style={{ fontWeight: 600 }}>
-                          {evt.repo.name}
-                        </a>
-
-                        {shortSha && (
-                          <a
-                            href={targetUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="font-mono"
-                            style={{
-                              fontSize: '0.75rem',
-                              padding: '0.1rem 0.35rem',
-                              borderRadius: '0.25rem',
-                              background: 'var(--hover-bg)',
-                              border: '1px solid var(--border-color)',
-                              color: 'var(--text-color)',
-                              textDecoration: 'none'
-                            }}
-                          >
-                            #{shortSha}
-                          </a>
-                        )}
-                      </div>
-
-                      {commitMessage && (
-                        <div style={{ fontSize: '0.85rem', color: 'var(--text-color)', marginTop: '0.25rem', fontStyle: 'italic' }}>
-                          "{commitMessage}"
-                        </div>
-                      )}
-
-                      <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem', marginTop: '0.25rem' }}>
-                        {getTimeAgo(evt.created_at)} ({new Date(evt.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })})
+                  <div key={evt.id} className="activity-row card">
+                    <div className="activity-time">
+                      {getTimeAgo(evt.created_at)}
+                      <div style={{ opacity: 0.6, fontSize: '0.7rem', marginTop: '0.15rem' }}>
+                        {new Date(evt.created_at).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                       </div>
                     </div>
 
-                    <a
-                      href={targetUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="icon-btn"
-                      title="View on GitHub"
-                    >
-                      <ExternalLink size={16} />
-                    </a>
+                    <div className="activity-content">
+                      <div className="activity-title">
+                        <GitCommit size={16} style={{ color: 'var(--accent-color)' }} />
+                        <span style={{ textTransform: 'capitalize' }}>{formatEventType(evt.type)}</span>
+                        <span style={{ color: 'var(--text-muted)' }}>on</span>
+                        <a href={`https://github.com/${evt.repo.name}`} target="_blank" rel="noreferrer">
+                          {evt.repo.name}
+                        </a>
+                      </div>
+                      
+                      {commitMessage && (
+                        <p className="activity-desc">"{commitMessage}"</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <a href={targetUrl} target="_blank" rel="noreferrer" className="activity-link">
+                        View Details <ExternalLink size={14} />
+                      </a>
+                    </div>
                   </div>
                 );
               })}
@@ -338,7 +313,7 @@ export default function StatsSection() {
               <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.25rem' }}>
                 <button
                   onClick={() => setVisibleCount((prev) => prev + 4)}
-                  className="hero-btn hero-btn-secondary"
+                  className="btn btn-secondary"
                   style={{ padding: '0.45rem 1.25rem', fontSize: '0.85rem', cursor: 'pointer' }}
                 >
                   More

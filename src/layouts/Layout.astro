@@ -1,8 +1,17 @@
+---
+import '../index.css';
+import '../projects.css';
+import FluidCanvas from '../components/FluidCanvas.jsx';
+import ThemeToggle from '../components/ThemeToggle.jsx';
+import Footer from '../components/Footer.jsx';
+
+const { title = "Musaddik Temkar — Portfolio" } = Astro.props;
+---
 <!DOCTYPE html>
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <script>
+    <script is:inline>
       (function() {
         try {
           var match = document.cookie.match(new RegExp('(^| )theme=([^;]+)'));
@@ -20,15 +29,25 @@
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Musaddik Temkar — Portfolio</title>
+    <title>{title}</title>
     <meta name="description" content="Personal portfolio of Musaddik Temkar featuring projects, stats, and developer work." />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <div class="main-wrapper">
+      <FluidCanvas client:only="preact" />
+
+      <div class="page-container">
+        <header class="top-header">
+          <div></div>
+          <ThemeToggle client:load />
+        </header>
+
+        <main class="content">
+          <slot />
+        </main>
+        
+        <Footer />
+      </div>
+    </div>
   </body>
 </html>
